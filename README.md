@@ -2,7 +2,6 @@
 
 [![Terraform](https://img.shields.io/badge/Terraform-1.0+-623CE4?style=for-the-badge&logo=terraform)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
 A production-ready Terraform configuration that deploys a highly available, scalable 3-tier web application architecture on AWS. This project implements the architecture described in the [Medium article](https://medium.com/@aaloktrivedi/building-a-3-tier-web-application-architecture-with-aws-1b2c5e35b5a3) by Aalok Trivedi, but fully automated with Infrastructure as Code.
 
@@ -240,59 +239,3 @@ After deployment, verify:
 - Security groups follow least-privilege principle
 - SSH access restricted to bastion host
 - State files encrypted in S3
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Setup
-
-```bash
-# Fork and clone
-git clone https://github.com/your-username/aws-iac-three-tier-stack.git
-
-# Create feature branch
-git checkout -b feature/amazing-improvement
-
-# Make changes, test thoroughly
-terraform validate
-terraform plan
-
-# Submit pull request
-```
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Inspired by [Aalok Trivedi's Medium article](https://medium.com/@aaloktrivedi/building-a-3-tier-web-application-architecture-with-aws-1b2c5e35b5a3)
-- Thanks to the Terraform and AWS communities for excellent documentation
-- Special thanks to all contributors and users
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/ikramulhaq63/aws-iac-three-tier-stack/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/ikramulhaq63/aws-iac-three-tier-stack/discussions)
-- **Documentation**: Check the [Wiki](https://github.com/ikramulhaq63/aws-iac-three-tier-stack/wiki)
-
----
-
-**Happy Deploying!** 🎉
-
-Built with ❤️ for the DevOps community
-```bash
-terraform init    # Retrieves state from S3
-terraform apply   # Recreates infrastructure
-```
-
-## For Different Environments
-- Copy the `dev` folder to `prod`, `staging`, etc.
-- Update bucket/table names in `bootstrap.tf` and `main.tf` backend config
-- Repeat steps 3-5 for each environment
-
-## Security Notes
-- S3 bucket has versioning and server-side encryption enabled
-- State is encrypted in transit and at rest
-- DynamoDB table uses pay-per-request billing for cost efficiency
