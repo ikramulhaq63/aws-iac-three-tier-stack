@@ -253,14 +253,14 @@ ssh -i modules/security/My-3tier-webapp-key.pem ec2-user@<BASTION_PUBLIC_IP>
 
 #### 2. Application Servers (via Bastion)
 ```bash
-# From bastion host, SSH to app servers
+# From bastion host, SSH to app servers (private subnet)
 ssh -i My-3tier-webapp-key.pem ec2-user@<PRIVATE_APP_SERVER_IP>
 ```
 
-#### 3. Web Servers (via Bastion)
+#### 3. Web Servers (Direct Access)
 ```bash
-# From bastion host, SSH to web servers
-ssh -i My-3tier-webapp-key.pem ec2-user@<PRIVATE_WEB_SERVER_IP>
+# Web servers are in public subnets - direct SSH access
+ssh -i modules/security/My-3tier-webapp-key.pem ec2-user@<PUBLIC_WEB_SERVER_IP>
 ```
 
 ### Key Security Notes
@@ -269,13 +269,18 @@ ssh -i My-3tier-webapp-key.pem ec2-user@<PRIVATE_WEB_SERVER_IP>
 - 🔒 **File permissions** are automatically set to prevent unauthorized access
 - 🗑️ **Key is deleted** when you destroy the infrastructure
 - 🔄 **New key generated** on each deployment for security
+- 🌐 **Web tier is public** - Direct SSH access to web servers (public subnets)
+- 🚫 **App tier is private** - Requires bastion host for SSH access (private subnets)
 
 ### Finding Instance IPs
 
-Use AWS Console or CLI to find private IPs:
+Use AWS Console or CLI to find instance IPs:
 ```bash
-# List EC2 instances
+# List all instances with their IPs
 aws ec2 describe-instances --filters "Name=tag:Name,Values=My-3tier-webapp*" --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value|[0],PrivateIpAddress,PublicIpAddress]' --output table
+
+# Web servers have public IPs (direct access)
+# App servers have only private IPs (bastion required)
 ```
 
 ## 🛡️ Security Considerations
