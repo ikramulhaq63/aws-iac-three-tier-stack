@@ -10,19 +10,7 @@ A production-ready Terraform configuration that deploys a highly available, scal
 
 This implementation creates a secure, highly available 3-tier architecture across multiple Availability Zones:
 
-```
-Internet
-    ↓
-[Application Load Balancer] (Web Tier)
-    ↓
-[Auto Scaling Group - Web Servers] (Public Subnets)
-    ↓
-[Application Load Balancer] (App Tier)
-    ↓
-[Auto Scaling Group - App Servers] (Private Subnets)
-    ↓
-[Amazon RDS MySQL] (Database Tier - Private Subnets)
-```
+![AWS 3-Tier Architecture](AWS.png)
 
 ### Key Components
 
