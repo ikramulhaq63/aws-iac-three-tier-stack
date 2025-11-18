@@ -1,3 +1,24 @@
+# To enable state locking with S3 backend:
+# 1. Go to bootstrap/ directory and run terraform apply to create the S3 bucket and DynamoDB table.
+# 2. Return to dev/ directory and run terraform init to initialize with S3 backend.
+# 3. Run terraform apply to create infrastructure.
+# For destroy: Run terraform destroy in dev/ (infrastructure only, bucket/table persist in bootstrap/).
+# When recreating: terraform init will retrieve state from S3 bucket.
+
+terraform {
+  backend "s3" {
+    bucket         = "3tier-webapp-terraform-state-dev"
+    key            = "dev/terraform.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "3tier-webapp-terraform-locks-dev"
+    encrypt        = true
+  }
+}
+
+provider "aws" {
+  region = "us-east-2"
+}
+
 # NETWORKING MODULES
 module "networking" {
     source = "../../modules/networking"
