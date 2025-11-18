@@ -1,0 +1,24 @@
+project_name = "My-3tier-webapp"
+vpc_cidr = "10.0.0.0/16"
+public_subnet_1_cidr = "10.0.1.0/24"
+public_subnet_2_cidr = "10.0.2.0/24"
+availability_zone_1 = "us-east-2a"
+availability_zone_2 = "us-east-2b"
+private_subnet_1_app_cidr = "10.0.11.0/24"
+private_subnet_2_app_cidr = "10.0.12.0/24"
+private_subnet_1_db_cidr = "10.0.13.0/24"
+private_subnet_2_db_cidr = "10.0.14.0/24"
+# Web Tier
+web_instance_type = "t2.micro"
+web_min_size          = 1
+web_max_size          = 3
+web_desired_capacity  = 2
+# App Tier
+app_instance_type     = "t2.micro"
+app_min_size          = 1
+app_max_size          = 3
+app_desired_capacity  = 2
+# Database
+db_engine         = "mysql"
+db_engine_version = "8.0"
+db_instance_class = "db.t3.micro"
