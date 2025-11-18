@@ -231,6 +231,53 @@ After deployment, verify:
 4. **Scaling**: Monitor CPU and verify auto-scaling works
 5. **High Availability**: Test failover (terminate instances)
 
+## 🔐 SSH Access & Key Management
+
+### Generated SSH Key Pair
+
+During deployment, Terraform automatically generates an SSH key pair for secure access to your EC2 instances:
+
+- **Private Key Location**: `modules/security/My-3tier-webapp-key.pem`
+- **Key Pair Name**: `My-3tier-webapp-key-pair` (created in AWS)
+- **Permissions**: Automatically set to `0400` (read-only for owner)
+
+### Connecting to Instances
+
+#### 1. Bastion Host (Jump Server)
+```bash
+# SSH to bastion host
+ssh -i modules/security/My-3tier-webapp-key.pem ec2-user@<BASTION_PUBLIC_IP>
+
+# The bastion public IP is shown in deployment outputs
+```
+
+#### 2. Application Servers (via Bastion)
+```bash
+# From bastion host, SSH to app servers
+ssh -i My-3tier-webapp-key.pem ec2-user@<PRIVATE_APP_SERVER_IP>
+```
+
+#### 3. Web Servers (via Bastion)
+```bash
+# From bastion host, SSH to web servers
+ssh -i My-3tier-webapp-key.pem ec2-user@<PRIVATE_WEB_SERVER_IP>
+```
+
+### Key Security Notes
+
+- ⚠️ **Keep the private key secure** - Never commit it to version control
+- 🔒 **File permissions** are automatically set to prevent unauthorized access
+- 🗑️ **Key is deleted** when you destroy the infrastructure
+- 🔄 **New key generated** on each deployment for security
+
+### Finding Instance IPs
+
+Use AWS Console or CLI to find private IPs:
+```bash
+# List EC2 instances
+aws ec2 describe-instances --filters "Name=tag:Name,Values=My-3tier-webapp*" --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value|[0],PrivateIpAddress,PublicIpAddress]' --output table
+```
+
 ## 🛡️ Security Considerations
 
 - All sensitive data is parameterized (no hardcoded secrets)
