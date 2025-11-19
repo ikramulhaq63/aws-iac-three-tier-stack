@@ -20,6 +20,30 @@ This implementation creates a secure, highly available 3-tier architecture acros
 - **Security**: Security groups with least-privilege access
 - **State Management**: S3 backend with DynamoDB locking for team collaboration
 
+## 📁 Project Structure
+
+```
+aws-iac-three-tier-stack/
+├── environments/                    # Environment-specific configurations
+│   └── dev/                         # Development environment
+│       ├── bootstrap/               # State management resources
+│       │   └── bootstrap.tf         # S3 bucket & DynamoDB table
+│       ├── main.tf                  # Main infrastructure
+│       ├── outputs.tf               # Terraform outputs
+│       ├── terraform.tfvars         # Variable values
+│       └── variable.tf              # Variable definitions
+├── modules/                         # Reusable Terraform modules
+│   ├── networking/                  # VPC, subnets, gateways
+│   ├── security/                    # Security groups, SSH keys
+│   ├── web-tier/                    # Load balancers, web servers
+│   ├── app-tier/                    # Application servers
+│   └── database-tier/               # RDS MySQL database
+├── .gitignore                       # Git ignore rules
+├── README.md                        # Project documentation
+├── deploy.sh                        # Automated deployment script
+└── destroy.sh                       # Automated destruction script
+```
+
 ## ✨ Features
 
 - 🚀 **Highly Available**: Multi-AZ deployment with auto-scaling
