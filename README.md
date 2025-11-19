@@ -3,7 +3,7 @@
 [![Terraform](https://img.shields.io/badge/Terraform-1.0+-623CE4?style=for-the-badge&logo=terraform)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
 
-A production-ready Terraform configuration that deploys a highly available, scalable 3-tier web application architecture on AWS. This project implements the architecture described in the [Medium article](https://medium.com/@aaloktrivedi/building-a-3-tier-web-application-architecture-with-aws-1b2c5e35b5a3) by Aalok Trivedi, but fully automated with Infrastructure as Code.
+A production-ready Terraform configuration that deploys a highly available, scalable 3-tier web application architecture on AWS. This project implements the architecture described in the [Medium article](https://medium.com/@aaloktrivedi/building-a-3-tier-web-application-architecture-with-aws-eb5981613e30) by Aalok Trivedi, but fully automated with Infrastructure as Code.
 
 ## 🏗️ Architecture Overview
 
